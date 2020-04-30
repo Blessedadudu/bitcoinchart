@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-// import Chart from './components/Chart';
 import { CartesianGrid, XAxis, YAxis, AreaChart, Tooltip, Area } from 'recharts';
 
 class App extends Component {
@@ -8,50 +7,7 @@ class App extends Component {
     super();
     this.state = {
       chartData:{},
-      price: [
-        // {
-        //   "name": "Page A",
-        //   "uv": 4000,
-        //   "pv": 2400,
-        //   "amt": 2400
-        // },
-        // {
-        //   "name": "Page B",
-        //   "uv": 3000,
-        //   "pv": 1398,
-        //   "amt": 2210
-        // },
-        // {
-        //   "name": "Page C",
-        //   "uv": 2000,
-        //   "pv": 9800,
-        //   "amt": 2290
-        // },
-        // {
-        //   "name": "Page D",
-        //   "uv": 2780,
-        //   "pv": 3908,
-        //   "amt": 2000
-        // },
-        // {
-        //   "name": "Page E",
-        //   "uv": 1890,
-        //   "pv": 4800,
-        //   "amt": 2181
-        // },
-        // {
-        //   "name": "Page F",
-        //   "uv": 2390,
-        //   "pv": 3800,
-        //   "amt": 2500
-        // },
-        // {
-        //   "name": "Page G",
-        //   "uv": 3490,
-        //   "pv": 4300,
-        //   "amt": 2100
-        // }
-      ]
+      price: []
     }
   }
 
@@ -68,8 +24,7 @@ class App extends Component {
     let subscribe = {
       "type": "subscribe",
       "product_ids": [
-          "ETH-USD",
-          "ETH-EUR"
+          "ETH-USD"
       ],
       "channels": [
           "level500",
@@ -93,7 +48,6 @@ class App extends Component {
         price: [...this.state.price, response],
         
       });
-      console.log(this.state.price); 
 
     };
     ws.onclose = () => {
@@ -107,9 +61,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <Chart chartData={this.state.chartData} location="Massachusetts" legendPosition="bottom"/> */}
-
-        <AreaChart width={1000} height={500} data={this.state.price}
+        <h1>Bitcoin Chart (USSD)</h1>
+        <AreaChart width={1300} height={500} data={this.state.price}
           margin={{ top: 10, right: 30, left: 10, bottom: 10 }}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -121,9 +74,9 @@ class App extends Component {
               <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <XAxis dataKey="sequence" />
-          <YAxis  dataKey="price" />
-          <CartesianGrid strokeDasharray="5 5" />
+          <XAxis dataKey="price" />
+          <YAxis  />
+          <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
           <Area type="monotone" dataKey="price" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
         </AreaChart>
